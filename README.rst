@@ -24,6 +24,8 @@ Notes
 
 * The Python version used so far is 2.7 (I'll implemente 3.x too)
 
+* Again, it is under development so there might be memory leaks or bugs. If you find any please open a new issue.
+
 Contributing
 ============
 
