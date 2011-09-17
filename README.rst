@@ -18,7 +18,7 @@ Compilation / Installation
 Notes
 =====
 
-* So far there's just a simple unittest that runs when mongodb starts. That unittest has to be light an test some basic functionalities. If you'd like to avoid the unittest simply put a return at the beggining of the run function.
+* So far there's just a simple unittest that runs when mongodb starts. That unittest has to be light an test some basic functionalities. If you'd like to avoid the unittest simply put a return statement at the beggining of the run function.
 
 * The SConstruct line numbers are based on the latest mongodb version found on github at the moment of this commit.
 
