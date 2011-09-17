@@ -12,7 +12,7 @@ Compilation / Installation
 * Edit the SConstruct file adding the following options:
 
   * 118: boostLibs = [ "thread" , "filesystem" , "program_options", "python" ]
-  * 392: scriptingFiles = [ "scripting/engine.cpp" , "scripting/utils.cpp" , "scripting/bench.cpp", Glob("scripting/*python*.cpp")  ]
+  * 392: scriptingFiles = [ "scripting/engine.cpp" , "scripting/utils.cpp" , "scripting/bench.cpp", Glob("scripting/\*python\*.cpp")  ]
   * 932: myCheckLib([ "python", "python2.7" ], True)
 
 Notes
