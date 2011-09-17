@@ -30,3 +30,11 @@ Contributing
 ============
 
 If you think this project might be useful or If you simply want to have fun playing with mongodb and python together then feel free to write me or simply fork the project and send me pull requests.
+
+TODO
+====
+
+* BSONObj to/from Python
+* OID to/from python 
+* Multi Thread tests
+* TSP Implementation (see utils/concurrency/threadlocal.h)
