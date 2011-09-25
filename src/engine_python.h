@@ -18,7 +18,7 @@
 
 #include "../db/jsobj.h"
 #include "../util/unittest.h"
-//#include "../util/concurrency/threadlocal.h" //TODO
+#include "../util/concurrency/threadlocal.h" //TODO
 
 #include "engine.h"
 
@@ -78,7 +78,7 @@ namespace mongo {
         char scopeGetType(const char * field );
         
         int scopeSetNumber(const char * field , double val );
-        void scopeSetString(const char * field , const char * val );
+        int scopeSetString(const char * field , const char * val );
         void scopeSetObject(const char * field , const BSONObj * obj );
         void scopeSetBoolean(const char * field , bool val );
         void scopeSetThis( const BSONObj * obj );
@@ -95,7 +95,7 @@ namespace mongo {
         vector<object> _funcs;
         
         PyInterpreter* _ts(bool reset = false);
-        boost::thread_specific_ptr<PyInterpreter> _interpreter; //TODO: use TSP
+        TSP_DEFINE(PyInterpreter, _interpreter)
     };
         
     extern PythonVMImpl *PythonVM;

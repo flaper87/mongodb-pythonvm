@@ -28,10 +28,14 @@
 #include <boost/format.hpp>
 #include <boost/algorithm/string.hpp>
 
+#include "../util/pybson/_cbson.h";
+
 namespace mongo {
     
     PythonVMImpl * PythonVM = 0;
     PyThreadState* PythonVMImpl::m_thread_state = 0;
+    
+    TSP_DECLARE(PyInterpreter, _interpreter)
     
     // ScopedGILLock
     inline ScopedGILLock::ScopedGILLock(PyInterpreter *intrp) {
@@ -182,10 +186,11 @@ namespace mongo {
         return 0;
     }
     
-    void PythonVMImpl::scopeSetString(const char * field , const char * val ) {
+    int PythonVMImpl::scopeSetString(const char * field , const char * val ) {
         ScopedGILLock lock = ScopedGILLock(_ts());
         
         _ts()->main_namespace[field] = object(val);
+        return 0;
     }
     
     void PythonVMImpl::scopeSetObject(const char * field , const BSONObj * obj ) {
@@ -411,6 +416,15 @@ namespace mongo {
         assert(PythonVM.invoke( func3 ) == 1 );
         if ( debug ) out() << "func3 done" << endl;
         
+        if ( debug ) out() << "func4 start" << endl;
+        assert( PythonVM.scopeSetString( "mystring" , "This is my string" ) == 0 );
+        ScriptingFunction func4 = PythonVM.functionCreate( "assert mystring == \"This is my string\"" );
+        assert( func4 );
+        assert(PythonVM.invoke( func4 ) == 0 );
+        if ( debug ) out() << "func4 done" << endl;
+
+        
+        
         /*
         if ( debug ) out() << "going to get object" << endl;
         BSONObj obj = JavaJS.scopeGetObject( scope , "abc" );
@@ -419,6 +433,8 @@ namespace mongo {
         if ( debug ) {
             out() << "obj : " << obj.toString() << endl;
         }
+        
+        
         
         {
             time_t start = time(0);
