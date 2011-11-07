@@ -37,4 +37,3 @@ TODO
 * BSONObj to/from Python
 * OID to/from python 
 * Multi Thread tests
-* TSP Implementation (see utils/concurrency/threadlocal.h)
